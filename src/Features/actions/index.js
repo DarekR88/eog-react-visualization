@@ -3,3 +3,9 @@ export const selector = () => {
         type: 'SELECTOR'
     }
 }
+
+export const timestamp = () =>{
+    return {
+        type: 'TIMESTAMP'
+    }
+}

@@ -5,8 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux'
-import HeartBeat from '../Features/Heartbeat/heartBeat';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     button: {
