@@ -5,6 +5,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import {useDispatch} from 'react-redux'
+import {selector} from '../Features/actions';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -19,11 +21,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function ControlledOpenSelect() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [metric, setMetric] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   const handleChange = event => {
-    setMetric(event.target.value);
+    const value = event.target.value;
+    setMetric(value);
+    dispatch({
+        type: "SELECTOR",
+      payload: value
+    })   
   };
 
   const handleClose = () => {
