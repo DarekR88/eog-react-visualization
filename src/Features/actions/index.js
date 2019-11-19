@@ -9,3 +9,9 @@ export const timestamp = () =>{
         type: 'TIMESTAMP'
     }
 }
+
+export const data = () => {
+    return {
+        type: 'METRIC_DATA'
+    }
+}
