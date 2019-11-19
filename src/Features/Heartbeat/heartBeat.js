@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import timestamp from '../actions'
 import { Provider, createClient, useQuery } from 'urql';
 import Chip from '../../components/Chip';
 
