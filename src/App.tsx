@@ -10,6 +10,7 @@ import Wrapper from './components/Wrapper';
 // import NowWhat from './components/NowWhat';
 import Chart from './components/Chart';
 import Selector from './components/Selector';
+import Switches from './components/Switches';
 
 const store = createStore();
 const theme = createMuiTheme({
@@ -33,6 +34,7 @@ const App = () => (
       <Wrapper>
         <Header />
         <Selector />
+        <Switches />
         <Chart />
         {/* <NowWhat /> */}
         <ToastContainer />
