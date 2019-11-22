@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider, createClient, useQuery } from 'urql';
 import Chip from '../../components/Chip';
+import moment from 'moment';
 
 const client = createClient({
     url: "https://react.eogresources.com/graphql"
@@ -44,5 +45,5 @@ const Heartbeat = () => {
         }
       );
 
-      return <Chip label={timeStamp} />
+      return <Chip label={moment(timeStamp).format("MM/DD/YYYY")} />
 }

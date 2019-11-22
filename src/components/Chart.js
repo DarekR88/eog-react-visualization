@@ -5,13 +5,10 @@ import {
 import Data from '../Features/MetricData/metricData'
 import { useSelector } from "react-redux";
 
-
-
-
 export default function Chart() {
 
   const metricData = useSelector(state => state.metricData.metricData)
-  // const metric = useSelector(state => state.selector.selectedMetric);
+  console.log(metricData)
 
   return (
     <div>
@@ -29,7 +26,7 @@ export default function Chart() {
         <YAxis dataKey="value" />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="value" stroke="#8884d8" />
+        <Line type="monotone" dataKey="value" />
       </LineChart>
     </div>
 
