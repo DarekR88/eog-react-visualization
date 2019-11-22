@@ -30,7 +30,7 @@ export default () => {
 };
 
 const MultipleMetrics = () => {
-    const metric = useSelector(state => state.selector.selectedMetric);
+    // const activeMetrics = useSelector(state => state)
     const timeStamp = useSelector(state => state.heartbeat)
     const dispatch = useDispatch();
 
@@ -65,6 +65,7 @@ const MultipleMetrics = () => {
                 type: "MULTIPLE_DATA",
                 payload: getMultipleMeasurements
             });
+            console.log(getMultipleMeasurements)
         }
     });
 

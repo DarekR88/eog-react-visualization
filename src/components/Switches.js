@@ -3,6 +3,7 @@ import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Switches() {
     const [state, setState] = React.useState({
@@ -14,9 +15,21 @@ export default function Switches() {
         checkedF: false,
     });
 
+    const timeStamp = useSelector(state => state.heartbeat)
+    const dispatch = useDispatch();
+
     const handleChange = name => event => {
+        const metric = event.target.value
         setState({ ...state, [name]: event.target.checked });
-        console.log(event.target.value)
+
+        dispatch({
+            type: "ACTIVE",
+            payload: {
+                metricName: metric,
+                before: timeStamp.current,
+                after: timeStamp.past
+            }
+        })
     };
 
     return (

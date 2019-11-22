@@ -10,9 +10,9 @@ import MultipleMetrics from '../Features/MultipleMetrics/multipleMetrics'
 export default function Chart() {
 
   const metricData = useSelector(state => state.metricData.metricData)
-  if(metricData.length === 0){
-    console.log("no data")
-  }
+  // const multipleData = useSelector(state => state.multipleData.multipleData)
+
+
   return (
     <div>
       <MultipleMetrics />
@@ -28,6 +28,7 @@ export default function Chart() {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="at" />
+        <YAxis dataKey="value" />
         <YAxis dataKey="value" />
         <Tooltip />
         <Legend />

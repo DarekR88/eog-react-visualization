@@ -21,3 +21,9 @@ export const multipleData = () => {
         type: 'MULTIPLE_DATA'
     }
 }
+
+export const activeMetrics = () => {
+    return {
+        type: 'ACTIVE'
+    }
+}
