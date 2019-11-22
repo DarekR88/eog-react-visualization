@@ -57,7 +57,6 @@ const Data = () => {
           type: "METRIC_DATA",
           payload: getMeasurements
         });
-        console.log(getMeasurements);
       }
     });
   

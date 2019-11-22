@@ -30,24 +30,16 @@ export default () => {
 };
 
 const MultipleMetrics = () => {
-    // const activeMetrics = useSelector(state => state)
-    const timeStamp = useSelector(state => state.heartbeat)
+    const activeMetrics = useSelector(state => state.activeMetrics.selectedMetrics)
+ 
     const dispatch = useDispatch();
 
 
     const [measurementRes] = useQuery({
         query: measurementQuery,
         variables: {
-            input: [{
-                metricName: "oilTemp",
-                before: timeStamp.current,
-                after: timeStamp.past
-            },
-            {
-                metricName: "flareTemp",
-                before: timeStamp.current,
-                after: timeStamp.past
-            }]
+            input: 
+            activeMetrics.slice(1)
         }
     });
 
@@ -65,7 +57,6 @@ const MultipleMetrics = () => {
                 type: "MULTIPLE_DATA",
                 payload: getMultipleMeasurements
             });
-            console.log(getMultipleMeasurements)
         }
     });
 
