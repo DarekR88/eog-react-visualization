@@ -4,6 +4,7 @@ import {
 } from 'recharts';
 import Data from '../Features/MetricData/metricData'
 import { useSelector } from "react-redux";
+import Card from '../components/Card';
 
 export default function Chart() {
 
@@ -13,6 +14,7 @@ export default function Chart() {
   return (
     <div>
       <Data />
+      <Card />
       <LineChart
         width={1000}
         height={600}
