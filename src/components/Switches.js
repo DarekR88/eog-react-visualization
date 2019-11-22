@@ -17,19 +17,32 @@ export default function Switches() {
 
     const timeStamp = useSelector(state => state.heartbeat)
     const dispatch = useDispatch();
+    const activeArr = useSelector(state => state.activeMetrics.selectedMetrics)
 
     const handleChange = name => event => {
         const metric = event.target.value
+        const isChecked = event.target.checked
         setState({ ...state, [name]: event.target.checked });
+        if (isChecked) {
+            dispatch({
+                type: "ACTIVE",
+                payload: {
+                    metricName: metric,
+                    before: timeStamp.current,
+                    after: timeStamp.past
+                }
+            })
+        } 
+        else {
+            const metricIndex = activeArr.find(element => element.metricName === metric)
+            
+            dispatch({
+                type: "REMOVE",
+                payload: metricIndex.metricName
+            })
+        }
 
-        dispatch({
-            type: "ACTIVE",
-            payload: {
-                metricName: metric,
-                before: timeStamp.current,
-                after: timeStamp.past
-            }
-        })
+
     };
 
     return (

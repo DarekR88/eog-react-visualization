@@ -24,6 +24,7 @@ export const multipleData = () => {
 
 export const activeMetrics = () => {
     return {
-        type: 'ACTIVE'
+        type: 'ACTIVE',
+        type: 'REMOVE'
     }
 }
