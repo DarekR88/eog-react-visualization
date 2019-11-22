@@ -8,12 +8,15 @@ const client = createClient({
 });
 
 const measurementQuery = `
-  query($input: MeasurementQuery) {
-    getMeasurements(input: $input) {
+  query($input: [MeasurementQuery]) {
+    getMultipleMeasurements(input: $input) {
       metric,
-      at,
-      value,
-      unit
+        measurements {
+            metric,
+            at,
+            value,
+            unit
+        }
     }                                                                                       
   }
   `;
@@ -21,46 +24,50 @@ const measurementQuery = `
 export default () => {
     return (
         <Provider value={client}>
-            <Data />
+            <MultipleMetrics />
         </Provider>
     );
 };
 
-const Data = () => {
+const MultipleMetrics = () => {
     const metric = useSelector(state => state.selector.selectedMetric);
     const timeStamp = useSelector(state => state.heartbeat)
     const dispatch = useDispatch();
 
-  
+
     const [measurementRes] = useQuery({
-      query: measurementQuery,
-      variables: {
-        input: {
-          metricName: metric,
-          before: timeStamp.current,
-          after: timeStamp.past
+        query: measurementQuery,
+        variables: {
+            input: [{
+                metricName: "oilTemp",
+                before: timeStamp.current,
+                after: timeStamp.past
+            },
+            {
+                metricName: "flareTemp",
+                before: timeStamp.current,
+                after: timeStamp.past
+            }]
         }
-      }
     });
-  
+
     const { fetching, data, error } = measurementRes;
-  
+
     useEffect(() => {
-      if (error) {
-        return;
-      }
-      if (!data) {
-        return;
-      } else {
-        const { getMeasurements } = data;
-        dispatch({
-          type: "METRIC_DATA",
-          payload: getMeasurements
-        });
-        console.log(getMeasurements);
-      }
+        if (error) {
+            return;
+        }
+        if (!data) {
+            return;
+        } else {
+            const { getMultipleMeasurements } = data;
+            dispatch({
+                type: "MULTIPLE_DATA",
+                payload: getMultipleMeasurements
+            });
+        }
     });
-  
+
     if (fetching) return <LinearProgress />;
 
     return null

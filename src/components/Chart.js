@@ -5,14 +5,17 @@ import {
 import Data from '../Features/MetricData/metricData'
 import { useSelector } from "react-redux";
 import Card from '../components/Card';
+import MultipleMetrics from '../Features/MultipleMetrics/multipleMetrics'
 
 export default function Chart() {
 
   const metricData = useSelector(state => state.metricData.metricData)
-  console.log(metricData)
-
+  if(metricData.length === 0){
+    console.log("no data")
+  }
   return (
     <div>
+      <MultipleMetrics />
       <Data />
       <Card />
       <LineChart
@@ -28,7 +31,7 @@ export default function Chart() {
         <YAxis dataKey="value" />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="value" />
+        <Line type="monotone" dataKey="value" dot={false} />
       </LineChart>
     </div>
 
