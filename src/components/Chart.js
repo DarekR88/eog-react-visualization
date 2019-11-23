@@ -2,7 +2,6 @@ import React from 'react';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
-import Data from '../Features/MetricData/metricData'
 import { useSelector } from "react-redux";
 import Card from '../components/Card';
 import MultipleMetrics from '../Features/MultipleMetrics/multipleMetrics'
@@ -10,13 +9,12 @@ import MultipleMetrics from '../Features/MultipleMetrics/multipleMetrics'
 export default function Chart() {
 
   const metricData = useSelector(state => state.metricData.metricData)
-  // const multipleData = useSelector(state => state.multipleData.multipleData)
+  
 
 
   return (
     <div>
       <MultipleMetrics />
-      <Data />
       <Card />
       <LineChart
         width={1000}

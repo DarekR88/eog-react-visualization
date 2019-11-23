@@ -101,7 +101,7 @@ export default function Switches() {
                     control={<Switch
                         checked={state.checkedE}
                         onChange={handleChange('checkedE')}
-                        value="casingPressurecheckedE"
+                        value="casingPressure"
                         color="primary"
                         inputProps={{ 'aria-label': 'primary checkbox' }}
                     />}
