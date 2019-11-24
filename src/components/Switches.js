@@ -23,6 +23,7 @@ export default function Switches() {
         const metric = event.target.value
         const isChecked = event.target.checked
         setState({ ...state, [name]: event.target.checked });
+        
         if (isChecked) {
             dispatch({
                 type: "ACTIVE",
@@ -32,10 +33,10 @@ export default function Switches() {
                     after: timeStamp.past
                 }
             })
-        } 
+        }
         else {
             const metricIndex = activeArr.find(element => element.metricName === metric)
-            
+
             dispatch({
                 type: "REMOVE",
                 payload: metricIndex.metricName
@@ -46,81 +47,85 @@ export default function Switches() {
     };
 
     return (
-        <FormControl component="fieldset">
-            <FormGroup aria-label="position" row>
-                <FormControlLabel
-                    value="top"
-                    control={<Switch
-                        checked={state.checkedA}
-                        onChange={handleChange('checkedA')}
-                        value="injValveOpen"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />}
-                    label="injValveOpen"
-                    labelPlacement="top"
-                />
-                <FormControlLabel
-                    value="start"
-                    control={<Switch
-                        checked={state.checkedB}
-                        onChange={handleChange('checkedB')}
-                        value="oilTemp"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />}
-                    label="oilTemp"
-                    labelPlacement="top"
-                />
-                <FormControlLabel
-                    value="bottom"
-                    control={<Switch
-                        checked={state.checkedC}
-                        onChange={handleChange('checkedC')}
-                        value="tubingPressure"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />}
-                    label="tubingPressure"
-                    labelPlacement="top"
-                />
-                <FormControlLabel
-                    value="end"
-                    control={<Switch
-                        checked={state.checkedD}
-                        onChange={handleChange('checkedD')}
-                        value="flareTemp"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />}
-                    label="flareTemp"
-                    labelPlacement="top"
-                />
-                <FormControlLabel
-                    value="end"
-                    control={<Switch
-                        checked={state.checkedE}
-                        onChange={handleChange('checkedE')}
-                        value="casingPressure"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />}
-                    label="casingPressure"
-                    labelPlacement="top"
-                />
-                <FormControlLabel
-                    value="end"
-                    control={<Switch
-                        checked={state.checkedF}
-                        onChange={handleChange('checkedF')}
-                        value="waterTemp"
-                        color="primary"
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />}
-                    label="waterTemp"
-                    labelPlacement="top"
-                />
-            </FormGroup>
-        </FormControl>
+        <div>
+            <h1>Select Metrics</h1>
+            <FormControl component="fieldset">
+                <FormGroup aria-label="position" row>
+                    <FormControlLabel
+                        value="top"
+                        control={<Switch
+                            checked={state.checkedA}
+                            onChange={handleChange('checkedA')}
+                            value="injValveOpen"
+                            color="primary"
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                        />}
+                        label="injValveOpen"
+                        labelPlacement="top"
+                    />
+                    <FormControlLabel
+                        value="start"
+                        control={<Switch
+                            checked={state.checkedB}
+                            onChange={handleChange('checkedB')}
+                            value="oilTemp"
+                            color="primary"
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                        />}
+                        label="oilTemp"
+                        labelPlacement="top"
+                    />
+                    <FormControlLabel
+                        value="bottom"
+                        control={<Switch
+                            checked={state.checkedC}
+                            onChange={handleChange('checkedC')}
+                            value="tubingPressure"
+                            color="primary"
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                        />}
+                        label="tubingPressure"
+                        labelPlacement="top"
+                    />
+                    <FormControlLabel
+                        value="end"
+                        control={<Switch
+                            checked={state.checkedD}
+                            onChange={handleChange('checkedD')}
+                            value="flareTemp"
+                            color="primary"
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                        />}
+                        label="flareTemp"
+                        labelPlacement="top"
+                    />
+                    <FormControlLabel
+                        value="end"
+                        control={<Switch
+                            checked={state.checkedE}
+                            onChange={handleChange('checkedE')}
+                            value="casingPressure"
+                            color="primary"
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                        />}
+                        label="casingPressure"
+                        labelPlacement="top"
+                    />
+                    <FormControlLabel
+                        value="end"
+                        control={<Switch
+                            checked={state.checkedF}
+                            onChange={handleChange('checkedF')}
+                            value="waterTemp"
+                            color="primary"
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                        />}
+                        label="waterTemp"
+                        labelPlacement="top"
+                    />
+                </FormGroup>
+            </FormControl>
+        </div>
+
     );
 }

@@ -10,12 +10,6 @@ export const timestamp = () =>{
     }
 }
 
-export const data = () => {
-    return {
-        type: 'METRIC_DATA'
-    }
-}
-
 export const multipleData = () => {
     return {
         type: 'MULTIPLE_DATA'
