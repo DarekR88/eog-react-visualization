@@ -23,7 +23,7 @@ export default function Switches() {
         const metric = event.target.value
         const isChecked = event.target.checked
         setState({ ...state, [name]: event.target.checked });
-        
+
         if (isChecked) {
             dispatch({
                 type: "ACTIVE",
@@ -60,7 +60,7 @@ export default function Switches() {
                             color="primary"
                             inputProps={{ 'aria-label': 'primary checkbox' }}
                         />}
-                        label="injValveOpen"
+                        label="INJ Valve Open"
                         labelPlacement="top"
                     />
                     <FormControlLabel
@@ -72,7 +72,7 @@ export default function Switches() {
                             color="primary"
                             inputProps={{ 'aria-label': 'primary checkbox' }}
                         />}
-                        label="oilTemp"
+                        label="Oil Temp"
                         labelPlacement="top"
                     />
                     <FormControlLabel
@@ -84,7 +84,7 @@ export default function Switches() {
                             color="primary"
                             inputProps={{ 'aria-label': 'primary checkbox' }}
                         />}
-                        label="tubingPressure"
+                        label="Tubing Pressure"
                         labelPlacement="top"
                     />
                     <FormControlLabel
@@ -96,7 +96,7 @@ export default function Switches() {
                             color="primary"
                             inputProps={{ 'aria-label': 'primary checkbox' }}
                         />}
-                        label="flareTemp"
+                        label="Flare Temp"
                         labelPlacement="top"
                     />
                     <FormControlLabel
@@ -108,7 +108,7 @@ export default function Switches() {
                             color="primary"
                             inputProps={{ 'aria-label': 'primary checkbox' }}
                         />}
-                        label="casingPressure"
+                        label="Casing Pressure"
                         labelPlacement="top"
                     />
                     <FormControlLabel
@@ -120,7 +120,7 @@ export default function Switches() {
                             color="primary"
                             inputProps={{ 'aria-label': 'primary checkbox' }}
                         />}
-                        label="waterTemp"
+                        label="Water Temp"
                         labelPlacement="top"
                     />
                 </FormGroup>
