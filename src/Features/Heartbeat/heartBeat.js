@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider, createClient, useQuery } from 'urql';
 import Chip from '../../components/Chip';
+import { actions } from './sliceReducer';
 import moment from 'moment';
 
 const client = createClient({
-    url: "https://react.eogresources.com/graphql"
+  url: 'https://react.eogresources.com/graphql',
 });
 
 const heartBeatQuery = `
@@ -15,35 +16,34 @@ const heartBeatQuery = `
   `;
 
 export default () => {
-    return (
-        <Provider value={client}>
-            <Heartbeat />
-        </Provider>
-    );
+  return (
+    <Provider value={client}>
+      <Heartbeat />
+    </Provider>
+  );
 };
 
 const Heartbeat = () => {
-    const dispatch = useDispatch();
-    const timeStamp = useSelector(state => state.heartbeat.current)
+  const dispatch = useDispatch();
+  const timeStamp = useSelector(state => state.heartbeat.current);
 
-    const [heartBeatRes] = useQuery({
-        query: heartBeatQuery
-      });
-      const { data, error } = heartBeatRes;
-      useEffect(
-        () => {
-          if (error) {
-            console.log(error.message);
-            return;
-          }
-          if (!data) return;
-          
-          dispatch({
-            type: "TIMESTAMP",
-            payload: data.heartBeat
-          })
-        }
-      );
+  const [heartBeatRes] = useQuery({
+    query: heartBeatQuery,
+  });
+  const { data, error } = heartBeatRes;
+  useEffect(() => {
+    if (error) {
+      console.log(error.message);
+      return;
+    }
+    if (!data) return;
 
-      return <Chip label={moment(timeStamp).format("MM/DD/YYYY")} />
-}
+    dispatch(actions.timestamp(data.heartBeat));
+    // dispatch({
+    //   type: 'TIMESTAMP',
+    //   payload: data.heartBeat,
+    // });
+  });
+
+  return <Chip label={moment(timeStamp).format('MM/DD/YYYY')} />;
+};
