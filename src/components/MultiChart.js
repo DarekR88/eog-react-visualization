@@ -9,54 +9,31 @@ export default function MultiChart() {
 
   // function for converting camel case to sentence case
   const convertCase = metric => {
-    switch (metric) {
-      case 'injValveOpen':
-        return 'INJ Valve Open';
+    const names = {
+      injValveOpen: 'INJ Valve Open',
+      oilTemp: 'Oil Temp',
+      tubingPressure: 'Tubing Pressure',
+      flareTemp: 'Flare Temp',
+      casingPressure: 'Casing Pressure',
+      waterTemp: 'Water Temp',
+      default: 'metric',
+    };
 
-      case 'oilTemp':
-        return 'Oil Temp';
-
-      case 'tubingPressure':
-        return 'Tubing Pressure';
-
-      case 'flareTemp':
-        return 'Flare Temp';
-
-      case 'casingPressure':
-        return 'Casing Pressure';
-
-      case 'waterTemp':
-        return 'Water Temp';
-
-      default:
-        return 'metric';
-    }
+    return names[metric] || names['default'];
   };
 
   // function for changing the color of the lines of the metrics based on name
   const metricColor = metric => {
-    switch (metric) {
-      case 'injValveOpen':
-        return '#1BD82A';
-
-      case 'oilTemp':
-        return '#000000';
-
-      case 'tubingPressure':
-        return '#FF0000';
-
-      case 'flareTemp':
-        return '#FFB201';
-
-      case 'casingPressure':
-        return '#830BEE';
-
-      case 'waterTemp':
-        return '#000CFF';
-
-      default:
-        return '#00FFE0';
-    }
+    const colors = {
+      injValveOpen: '#1BD82A',
+      oilTemp: '#000000',
+      tubingPressure: '#FF0000',
+      flareTemp: '#FFB201',
+      casingPressure: '#830BEE',
+      waterTemp: '#000CFF',
+      default: '#00FFE0',
+    };
+    return colors[metric] || colors['default'];
   };
 
   return (

@@ -5,35 +5,32 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-    card: {
-        maxWidth: 150,
-        float: 'left',
-        marginLeft: 15,
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
+  card: {
+    maxWidth: 150,
+    float: 'left',
+    marginLeft: 15,
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
 });
 
 export default function SimpleCard(props) {
-    const classes = useStyles();
+  const classes = useStyles();
 
-
-    return (
-        <Card className={classes.card}>
-            <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {props.metric}
-                    </Typography>
-                <Typography variant="body2" component="p">
-                    {props.data}
-                    </Typography>
-            </CardContent>
-        </Card>
-    );
+  return (
+    <Card className={classes.card}>
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          {props.metric}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {props.data}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 }
-
-
