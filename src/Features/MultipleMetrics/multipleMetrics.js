@@ -53,10 +53,6 @@ const MultipleMetrics = () => {
     } else {
       const { getMultipleMeasurements } = data;
       dispatch(actions.multipleData(getMultipleMeasurements));
-      // dispatch({
-      //     type: "MULTIPLE_DATA",
-      //     payload: getMultipleMeasurements
-      // });
     }
   });
 

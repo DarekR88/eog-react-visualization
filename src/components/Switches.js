@@ -33,21 +33,9 @@ export default function Switches() {
           after: timeStamp.past,
         }),
       );
-      //   dispatch({
-      //     type: 'ACTIVE',
-      //     payload: {
-      //       metricName: metric,
-      //       before: timeStamp.current,
-      //       after: timeStamp.past,
-      //     },
-      //   });
     } else {
       const metricIndex = activeArr.find(element => element.metricName === metric);
       dispatch(actions.remove(metricIndex.metricName));
-      //   dispatch({
-      //     type: 'REMOVE',
-      //     payload: metricIndex.metricName,
-      //   });
     }
   };
 

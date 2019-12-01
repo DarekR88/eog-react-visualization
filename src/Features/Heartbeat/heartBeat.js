@@ -39,10 +39,6 @@ const Heartbeat = () => {
     if (!data) return;
 
     dispatch(actions.timestamp(data.heartBeat));
-    // dispatch({
-    //   type: 'TIMESTAMP',
-    //   payload: data.heartBeat,
-    // });
   });
 
   return <Chip label={moment(timeStamp).format('MM/DD/YYYY')} />;
