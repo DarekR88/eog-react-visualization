@@ -1,11 +1,14 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MultipleMetrics from '../Features/MultipleMetrics/multipleMetrics';
 import Card from '../components/Card';
+import { actions } from '../Features/MultipleMetrics/sliceReducer';
 
 export default function MultiChart() {
   const multiData = useSelector(state => state.multipleData.multipleData);
+  const newData = useSelector(state => state.subData.subData);
+  const dispatch = useDispatch();
 
   const names = {
     injValveOpen: 'INJ Valve Open',
@@ -32,7 +35,6 @@ export default function MultiChart() {
       <MultipleMetrics />
       {multiData.map(i => {
         const currentData = i.measurements[i.measurements.length - 1];
-
         return <Card metric={names[i.metric]} data={currentData.value} />;
       })}
       <LineChart width={1000} height={600}>

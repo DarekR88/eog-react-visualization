@@ -1,8 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Provider, useSubscription, createClient, defaultExchanges, subscriptionExchange } from 'urql';
-import { actions } from './reducer';
+import { actions } from '../MultipleMetrics/sliceReducer';
+import { actions as subActions } from '../Subscription/reducer';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
+import { cloneDeep } from 'lodash';
 
 const subscriptionClient = new SubscriptionClient('ws://react.eogresources.com/graphql', {
   reconnect: true,
@@ -35,9 +37,22 @@ export default () => {
 
 const Subscriber = () => {
   const dispatch = useDispatch();
-  const receiveMeasurement = useCallback(measurement => dispatch(actions.subData(measurement)), [dispatch]);
+  const multiData = useSelector(state => state.multipleData.multipleData);
+  const receiveMeasurement = useCallback(measurement => dispatch(subActions.subData(measurement)), [dispatch]);
   const [subscriptionResponse] = useSubscription({ query: newMessages });
   const { data: subscriptionData } = subscriptionResponse;
+
+  // if (subscriptionData) {
+  //   const tempData = cloneDeep(multiData);
+  //   const newMeasurement = subscriptionData.newMeasurement;
+
+  //   multiData.map((item, i) => {
+  //     if (item.metric === newMeasurement.metric) {
+  //       tempData[i].measurements.push(newMeasurement);
+  //       dispatch(actions.updateData(tempData));
+  //     }
+  //   });
+  // }
 
   useEffect(() => {
     if (!subscriptionData) return;
