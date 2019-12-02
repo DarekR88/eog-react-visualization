@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Wrapper from './components/Wrapper';
 import Switches from './components/Switches';
 import MultiChart from './components/MultiChart';
+import Subscription from './Features/Subscription/subscription'
 
 const store = createStore();
 const theme = createMuiTheme({
@@ -30,6 +31,7 @@ const App = () => (
     <CssBaseline />
     <Provider store={store}>
       <Wrapper>
+        <Subscription />
         <Header />
         <Switches />
         <MultiChart />
