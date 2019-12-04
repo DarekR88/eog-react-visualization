@@ -11,7 +11,7 @@ const slice = createSlice({
   reducers: {
       timestamp: (state, action) => {
         state.current = action.payload;
-        state.past = action.payload - 1800000;
+        state.past = action.payload - 180000;
       }
   },
 });
