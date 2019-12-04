@@ -1,10 +1,14 @@
 import React, { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Provider, useSubscription, createClient, defaultExchanges, subscriptionExchange } from 'urql';
-import { actions } from '../MultipleMetrics/sliceReducer';
 import { actions as subActions } from '../Subscription/reducer';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
-import { cloneDeep } from 'lodash';
+import { actions as otActions } from '../OilTemp/reducer';
+import { actions as injActions } from '../InjValve/reducer';
+import { actions as ftActions } from '../flareTemp/reducer';
+import { actions as cpActions } from '../CasingPressure/reducer';
+import { actions as tpActions } from '../TubingPressure/reducer';
+import { actions as wtActions } from '../WaterTemp/reducer';
 
 const subscriptionClient = new SubscriptionClient('ws://react.eogresources.com/graphql', {
   reconnect: true,
@@ -36,23 +40,26 @@ export default () => {
 };
 
 const Subscriber = () => {
+  const reducerSwitch = measurement => {
+    if (measurement.metric === 'oilTemp') {
+      return dispatch(otActions.oilTempData(measurement));
+    } else if (measurement.metric === 'injValveOpen') {
+      return dispatch(injActions.injValveData(measurement));
+    } else if (measurement.metric === 'flareTemp') {
+      return dispatch(ftActions.flareTempData(measurement));
+    } else if (measurement.metric === 'waterTemp') {
+      return dispatch(wtActions.waterTempData(measurement));
+    } else if (measurement.metric === 'casingPressure') {
+      return dispatch(cpActions.casingPressureData(measurement));
+    } else if (measurement.metric === 'tubingPressure') {
+      return dispatch(tpActions.tubingPressureData(measurement));
+    }
+  };
+
   const dispatch = useDispatch();
-  const multiData = useSelector(state => state.multipleData.multipleData);
-  const receiveMeasurement = useCallback(measurement => dispatch(subActions.subData(measurement)), [dispatch]);
+  const receiveMeasurement = useCallback(measurement => reducerSwitch(measurement), [reducerSwitch]);
   const [subscriptionResponse] = useSubscription({ query: newMessages });
   const { data: subscriptionData } = subscriptionResponse;
-
-  // if (subscriptionData) {
-  //   const tempData = cloneDeep(multiData);
-  //   const newMeasurement = subscriptionData.newMeasurement;
-
-  //   multiData.map((item, i) => {
-  //     if (item.metric === newMeasurement.metric) {
-  //       tempData[i].measurements.push(newMeasurement);
-  //       dispatch(actions.updateData(tempData));
-  //     }
-  //   });
-  // }
 
   useEffect(() => {
     if (!subscriptionData) return;

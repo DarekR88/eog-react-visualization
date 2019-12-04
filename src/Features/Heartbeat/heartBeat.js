@@ -41,5 +41,5 @@ const Heartbeat = () => {
     dispatch(actions.timestamp(data.heartBeat));
   });
 
-  return <Chip label={moment(timeStamp).format('MM/DD/YYYY')} />;
+  return null;
 };

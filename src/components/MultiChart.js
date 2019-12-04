@@ -1,14 +1,17 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
-import MultipleMetrics from '../Features/MultipleMetrics/multipleMetrics';
 import Card from '../components/Card';
-import { actions } from '../Features/MultipleMetrics/sliceReducer';
 
 export default function MultiChart() {
   const multiData = useSelector(state => state.multipleData.multipleData);
-  const newData = useSelector(state => state.subData.subData);
   const dispatch = useDispatch();
+  const injValveData = useSelector(state => state.injValve.injValveData);
+  const oilTempData = useSelector(state => state.oilTemp.oilTempData);
+  const flareTempData = useSelector(state => state.flareTemp.flareTempData);
+  const waterTempData = useSelector(state => state.waterTemp.waterTempData);
+  const casingPressureData = useSelector(state => state.casingPressure.casingPressureData);
+  const tubingPressureData = useSelector(state => state.tubingPressure.tubingPressureData);
 
   const names = {
     injValveOpen: 'INJ Valve Open',
@@ -32,10 +35,20 @@ export default function MultiChart() {
 
   return (
     <>
-      <MultipleMetrics />
       {multiData.map(i => {
-        const currentData = i.measurements[i.measurements.length - 1];
-        return <Card metric={names[i.metric]} data={currentData.value} />;
+        if (i.metric === injValveData.metric) {
+          return <Card metric={names[i.metric]} data={`${injValveData.value}${injValveData.unit}`} />;
+        } else if (i.metric === oilTempData.metric) {
+          return <Card metric={names[i.metric]} data={`${oilTempData.value}${oilTempData.unit}`} />;
+        } else if (i.metric === flareTempData.metric) {
+          return <Card metric={names[i.metric]} data={`${flareTempData.value}${flareTempData.unit}`} />;
+        } else if (i.metric === waterTempData.metric) {
+          return <Card metric={names[i.metric]} data={`${waterTempData.value}${waterTempData.unit}`} />;
+        } else if (i.metric === casingPressureData.metric) {
+          return <Card metric={names[i.metric]} data={`${casingPressureData.value}${casingPressureData.unit}`} />;
+        } else if (i.metric === tubingPressureData.metric) {
+          return <Card metric={names[i.metric]} data={`${tubingPressureData.value}${tubingPressureData.unit}`} />;
+        }
       })}
       <LineChart width={1000} height={600}>
         <CartesianGrid strokeDasharray="3 3" />
