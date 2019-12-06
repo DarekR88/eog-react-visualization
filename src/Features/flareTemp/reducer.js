@@ -1,12 +1,7 @@
 import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
-  flareTempData: {
-    metric: 'flareTemp',
-    at: 1575484653431,
-    value: 338.02,
-    unit: 'F',
-  },
+  flareTempData: [],
 };
 
 const slice = createSlice({
@@ -14,7 +9,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     flareTempData: (state, action) => {
-      state.flareTempData = action.payload;
+      state.flareTempData = [...state.flareTempData, action.payload];
     },
   },
 });

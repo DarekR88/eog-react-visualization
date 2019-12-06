@@ -1,7 +1,7 @@
 import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
-  selectedMetrics: [{}],
+  selectedMetrics: [],
 };
 
 const slice = createSlice({

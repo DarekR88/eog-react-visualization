@@ -1,12 +1,7 @@
 import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
-  waterTempData: {
-    metric: 'waterTemp',
-    at: 1575484818695,
-    value: 83.94,
-    unit: 'F',
-  },
+  waterTempData: [],
 };
 
 const slice = createSlice({
@@ -14,7 +9,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     waterTempData: (state, action) => {
-      state.waterTempData = action.payload;
+      state.waterTempData = [...state.waterTempData, action.payload];
     },
   },
 });

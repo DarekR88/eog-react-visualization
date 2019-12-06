@@ -1,12 +1,7 @@
 import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
-  tubingPressureData: {
-    metric: 'tubingPressure',
-    at: 1575484929347,
-    value: 437.29,
-    unit: 'PSI',
-  },
+  tubingPressureData: [],
 };
 
 const slice = createSlice({
@@ -14,7 +9,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     tubingPressureData: (state, action) => {
-      state.tubingPressureData = action.payload;
+      state.tubingPressureData = [...state.tubingPressureData, action.payload];
     },
   },
 });

@@ -1,12 +1,7 @@
 import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
-  oilTempData: {
-    metric: 'oilTemp',
-    at: 1575484869457,
-    value: 121.74,
-    unit: 'F',
-  },
+  oilTempData: [],
 };
 
 const slice = createSlice({
@@ -14,7 +9,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     oilTempData: (state, action) => {
-      state.oilTempData = action.payload;
+      state.oilTempData = [...state.oilTempData, action.payload];
     },
   },
 });

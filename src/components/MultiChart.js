@@ -1,53 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '../components/Card';
+// import DataCon from '../Features/DataCon/dataCon';
 // import { actions } from '../Features/DataCon/reducer'
-import { actions } from '../Features/MultipleMetrics/sliceReducer';
+// import { actions } from '../Features/MultipleMetrics/sliceReducer';
 
 export default function MultiChart() {
+  const [dataArr, dataCon] = useState([]);
   const multiData = useSelector(state => state.multipleData.multipleData);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const injValveData = useSelector(state => state.injValve.injValveData);
   const oilTempData = useSelector(state => state.oilTemp.oilTempData);
   const flareTempData = useSelector(state => state.flareTemp.flareTempData);
   const waterTempData = useSelector(state => state.waterTemp.waterTempData);
   const casingPressureData = useSelector(state => state.casingPressure.casingPressureData);
   const tubingPressureData = useSelector(state => state.tubingPressure.tubingPressureData);
-  // const displayData = useSelector(state => state.chartData.chartData);
+  const activeMetrics = useSelector(state => state.activeMetrics.selectedMetrics);
 
-  let chartData = JSON.parse(JSON.stringify(multiData));
-  if (chartData.length > 0) {
-    for (let i = 0; i < chartData.length; i++) {
-      if (chartData[i].metric === 'injValveOpen') {
-        chartData[i].measurements.shift();
-        chartData[i].measurements.push(injValveData);
-        // dispatch(actions.multipleData(chartData));
-      } else if (chartData[i].metric === 'flareTemp') {
-        chartData[i].measurements.shift();
-        chartData[i].measurements.push(flareTempData);
-        // dispatch(actions.multipleData(chartData));
-      } else if (chartData[i].metric === 'waterTemp') {
-        chartData[i].measurements.shift();
-        chartData[i].measurements.push(waterTempData);
-        // dispatch(actions.multipleData(chartData));
-      } else if (chartData[i].metric === 'oilTemp') {
-        chartData[i].measurements.shift();
-        chartData[i].measurements.push(oilTempData);
-        // dispatch(actions.multipleData(chartData));
-      } else if (chartData[i].metric === 'casingPressure') {
-        chartData[i].measurements.shift();
-        chartData[i].measurements.push(casingPressureData);
-        // dispatch(actions.multipleData(chartData));
-      } else if (chartData[i].metric === 'tubingPressure') {
-        chartData[i].measurements.shift();
-        chartData[i].measurements.push(tubingPressureData);
-        // dispatch(actions.multipleData(chartData));
-      }
+  useEffect(() => {
+    if (multiData.length > 0) {
+      dataCon([
+        {
+          metric: 'injValve',
+          measurements: multiData[0].measurements.concat(injValveData),
+        },
+        {
+          metric: 'oilTemp',
+          measurements: multiData[1].measurements.concat(oilTempData),
+        },
+        {
+          metric: 'casingPressure',
+          measurements: multiData[2].measurements.concat(casingPressureData),
+        },
+        {
+          metric: 'tubingPressure',
+          measurements: multiData[3].measurements.concat(tubingPressureData),
+        },
+        {
+          metric: 'flareTemp',
+          measurements: multiData[4].measurements.concat(flareTempData),
+        },
+        {
+          metric: 'waterTemp',
+          measurements: multiData[5].measurements.concat(waterTempData),
+        },
+      ]);
     }
-  }
-
-  console.log(chartData);
+  }, [injValveData]);
 
   const names = {
     injValveOpen: 'INJ Valve Open',
@@ -71,19 +71,50 @@ export default function MultiChart() {
 
   return (
     <>
-      {multiData.map(i => {
-        if (i.metric === injValveData.metric) {
-          return <Card metric={names[i.metric]} data={`${injValveData.value}${injValveData.unit}`} />;
-        } else if (i.metric === oilTempData.metric) {
-          return <Card metric={names[i.metric]} data={`${oilTempData.value} ${oilTempData.unit}`} />;
-        } else if (i.metric === flareTempData.metric) {
-          return <Card metric={names[i.metric]} data={`${flareTempData.value} ${flareTempData.unit}`} />;
-        } else if (i.metric === waterTempData.metric) {
-          return <Card metric={names[i.metric]} data={`${waterTempData.value} ${waterTempData.unit}`} />;
-        } else if (i.metric === casingPressureData.metric) {
-          return <Card metric={names[i.metric]} data={`${casingPressureData.value} ${casingPressureData.unit}`} />;
-        } else if (i.metric === tubingPressureData.metric) {
-          return <Card metric={names[i.metric]} data={`${tubingPressureData.value} ${tubingPressureData.unit}`} />;
+      {/* <DataCon /> */}
+      {activeMetrics.map(i => {
+        if (i.metricName === injValveData[0].metric) {
+          return (
+            <Card
+              metric={names[i.metricName]}
+              data={`${injValveData[injValveData.length - 1].value}${injValveData[0].unit}`}
+            />
+          );
+        } else if (i.metricName === oilTempData[0].metric) {
+          return (
+            <Card
+              metric={names[i.metricName]}
+              data={`${oilTempData[oilTempData.length - 1].value} ${oilTempData[0].unit}`}
+            />
+          );
+        } else if (i.metricName === flareTempData[0].metric) {
+          return (
+            <Card
+              metric={names[i.metricName]}
+              data={`${flareTempData[flareTempData.length - 1].value} ${flareTempData[0].unit}`}
+            />
+          );
+        } else if (i.metricName === waterTempData[0].metric) {
+          return (
+            <Card
+              metric={names[i.metricName]}
+              data={`${waterTempData[waterTempData.length - 1].value} ${waterTempData[0].unit}`}
+            />
+          );
+        } else if (i.metricName === casingPressureData[0].metric) {
+          return (
+            <Card
+              metric={names[i.metricName]}
+              data={`${casingPressureData[casingPressureData.length - 1].value} ${casingPressureData[0].unit}`}
+            />
+          );
+        } else if (i.metricName === tubingPressureData[0].metric) {
+          return (
+            <Card
+              metric={names[i.metricName]}
+              data={`${tubingPressureData[tubingPressureData.length - 1].value} ${tubingPressureData[0].unit}`}
+            />
+          );
         }
       })}
       <LineChart width={1000} height={600}>
@@ -92,7 +123,7 @@ export default function MultiChart() {
         <YAxis dataKey="value" />
         <Tooltip />
         <Legend layout="vertical" verticalAlign="middle" align="right" />
-        {chartData.map(i => {
+        {dataArr.map(i => {
           return (
             <Line
               dataKey="value"

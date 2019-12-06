@@ -4,6 +4,7 @@ import { Provider, createClient, useQuery } from 'urql';
 import Chip from '../../components/Chip';
 import { actions } from './sliceReducer';
 import moment from 'moment';
+import MultipleMetrics from '../MultipleMetrics/multipleMetrics';
 
 const client = createClient({
   url: 'https://react.eogresources.com/graphql',
@@ -41,5 +42,5 @@ const Heartbeat = () => {
     dispatch(actions.timestamp(data.heartBeat));
   });
 
-  return null;
+  return <MultipleMetrics />;
 };

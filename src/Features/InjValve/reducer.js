@@ -1,12 +1,7 @@
 import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
-  injValveData: {
-    metric: 'injValveOpen',
-    at: 1575484551903,
-    value: 80.56,
-    unit: '%',
-  },
+  injValveData: []
 };
 
 const slice = createSlice({
@@ -14,7 +9,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     injValveData: (state, action) => {
-      state.injValveData = action.payload;
+      state.injValveData = [...state.injValveData, action.payload]
     },
   },
 });
