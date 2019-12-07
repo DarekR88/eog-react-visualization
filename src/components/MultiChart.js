@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Card from '../components/Card';
-// import DataCon from '../Features/DataCon/dataCon';
-// import { actions } from '../Features/DataCon/reducer'
-// import { actions } from '../Features/MultipleMetrics/sliceReducer';
 
 export default function MultiChart() {
   const [dataArr, dataCon] = useState([]);
   const multiData = useSelector(state => state.multipleData.multipleData);
-  // const dispatch = useDispatch();
   const injValveData = useSelector(state => state.injValve.injValveData);
   const oilTempData = useSelector(state => state.oilTemp.oilTempData);
   const flareTempData = useSelector(state => state.flareTemp.flareTempData);
@@ -18,11 +14,23 @@ export default function MultiChart() {
   const tubingPressureData = useSelector(state => state.tubingPressure.tubingPressureData);
   const activeMetrics = useSelector(state => state.activeMetrics.selectedMetrics);
 
+  const filterByActive = data => {
+    for (let i = 0; i < activeMetrics.length; i++) {
+      if (data.metric === activeMetrics[i].metricName) {
+        return true;
+      }
+    }
+  };
+
+  const dataForChart = dataArr.filter(filterByActive);
+
+  console.log(dataForChart);
+
   useEffect(() => {
     if (multiData.length > 0) {
       dataCon([
         {
-          metric: 'injValve',
+          metric: 'injValveOpen',
           measurements: multiData[0].measurements.concat(injValveData),
         },
         {
@@ -71,7 +79,6 @@ export default function MultiChart() {
 
   return (
     <>
-      {/* <DataCon /> */}
       {activeMetrics.map(i => {
         if (i.metricName === injValveData[0].metric) {
           return (
@@ -123,7 +130,7 @@ export default function MultiChart() {
         <YAxis dataKey="value" />
         <Tooltip />
         <Legend layout="vertical" verticalAlign="middle" align="right" />
-        {dataArr.map(i => {
+        {dataForChart.map(i => {
           return (
             <Line
               dataKey="value"

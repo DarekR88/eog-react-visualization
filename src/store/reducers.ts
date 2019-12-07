@@ -3,7 +3,6 @@ import { reducer as heartBeatReducer } from '../Features/Heartbeat/sliceReducer'
 import { reducer as activeMetrics } from '../Features/ActiveMetrics/sliceReducer'
 import { reducer as multipleReducer } from '../Features/MultipleMetrics/sliceReducer'
 import { reducer as subReducer } from '../Features/Subscription/reducer';
-import { reducer as chartReducer } from '../Features/DataCon/reducer';
 import { reducer as waterTempReducer } from '../Features/WaterTemp/reducer';
 import { reducer as injValveReducer } from '../Features/InjValve/reducer';
 import { reducer as oilTempReducer } from '../Features/OilTemp/reducer';
@@ -18,7 +17,6 @@ export default {
   activeMetrics: activeMetrics,
   heartbeat: heartBeatReducer,
   subData: subReducer,
-  chartData: chartReducer,
   injValve: injValveReducer,
   oilTemp: oilTempReducer,
   waterTemp: waterTempReducer,
