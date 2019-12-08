@@ -24,11 +24,9 @@ export default function MultiChart() {
 
   const dataForChart = dataArr.filter(filterByActive);
 
-  console.log(dataForChart);
-
   useEffect(() => {
     if (multiData.length > 0) {
-      dataCon([
+      return dataCon([
         {
           metric: 'injValveOpen',
           measurements: multiData[0].measurements.concat(injValveData),
@@ -55,7 +53,7 @@ export default function MultiChart() {
         },
       ]);
     }
-  }, [injValveData]);
+  }, [injValveData, casingPressureData, flareTempData, multiData, oilTempData, tubingPressureData, waterTempData]);
 
   const names = {
     injValveOpen: 'INJ Valve Open',
@@ -83,6 +81,7 @@ export default function MultiChart() {
         if (i.metricName === injValveData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${injValveData[injValveData.length - 1].value}${injValveData[0].unit}`}
             />
@@ -90,6 +89,7 @@ export default function MultiChart() {
         } else if (i.metricName === oilTempData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${oilTempData[oilTempData.length - 1].value} ${oilTempData[0].unit}`}
             />
@@ -97,6 +97,7 @@ export default function MultiChart() {
         } else if (i.metricName === flareTempData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${flareTempData[flareTempData.length - 1].value} ${flareTempData[0].unit}`}
             />
@@ -104,6 +105,7 @@ export default function MultiChart() {
         } else if (i.metricName === waterTempData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${waterTempData[waterTempData.length - 1].value} ${waterTempData[0].unit}`}
             />
@@ -111,6 +113,7 @@ export default function MultiChart() {
         } else if (i.metricName === casingPressureData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${casingPressureData[casingPressureData.length - 1].value} ${casingPressureData[0].unit}`}
             />
@@ -118,6 +121,7 @@ export default function MultiChart() {
         } else if (i.metricName === tubingPressureData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${tubingPressureData[tubingPressureData.length - 1].value} ${tubingPressureData[0].unit}`}
             />
