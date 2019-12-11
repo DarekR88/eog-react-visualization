@@ -10,7 +10,7 @@ import { actions as cpActions } from '../CasingPressure/reducer';
 import { actions as tpActions } from '../TubingPressure/reducer';
 import { actions as wtActions } from '../WaterTemp/reducer';
 
-const subscriptionClient = new SubscriptionClient('ws://react.eogresources.com/graphql', {
+const subscriptionClient = new SubscriptionClient('wss://react.eogresources.com/graphql', {
   reconnect: true,
   timeout: 20000,
 });
